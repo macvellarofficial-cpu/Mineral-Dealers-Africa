@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, ArrowRight, ShieldCheck, Award, Star, HelpCircle } from 'lucide-react';
+import { Sparkles, ArrowRight, ShieldCheck, Award, Star, HelpCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import SEO from '../components/SEO';
 // @ts-ignore
 import goldBarsImg from '../assets/images/gold_bars_uganda_1781900099865.jpg';
 // @ts-ignore
 import rawGoldBowlsImg from '../assets/images/raw_gold_bowls_1781900113727.jpg';
+// @ts-ignore
+import goldNuggetsHandImg from '../assets/images/gold_nuggets_hand_1782011829727.jpg';
+// @ts-ignore
+import goldSmeltingImg from '../assets/images/gold_smelting_1782011846349.jpg';
+// @ts-ignore
+import goldNuggetsRawImg from '../assets/images/gold_nuggets_raw_1782011861528.jpg';
 
 interface HomeProps {
   onInquireGeneral: (contextText: string) => void;
@@ -13,33 +19,145 @@ interface HomeProps {
 }
 
 export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
-  // SEO structured schema for local mineral export corporate organization
+  // Slider state and slide configurations
+  const slides = [
+    {
+      image: goldNuggetsHandImg,
+      tag: "Sovereign Alluvial Sourcing",
+      title: "Direct Artisanal Mine Partnerships",
+      description: "Partnering with verified and vetted community co-ops to maintain premium raw gold Nugget inventory, adhering strictly to global OECD standards."
+    },
+    {
+      image: goldSmeltingImg,
+      tag: "Kampala Smelting & Assaying",
+      title: "LBMA-Standard Smelting & Verification",
+      description: "On-site modern furnace systems upgrading mineral purity, backed by independent double-blind assays certified at Entebbe state-level DGSM chambers."
+    },
+    {
+      image: goldNuggetsRawImg,
+      tag: "Uganda Mining Act 2022 Pathways",
+      title: "Legally Certified Airport Clearance Desk",
+      description: "Securing compliant Class A export clearances, transit seals, and full federal royalty payments for safe delivery inside Entebbe International Terminal."
+    }
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  // SEO structured schema for local mineral export corporate organization combined with FAQPage schema
   const homeSchema = {
     "@context": "https://schema.org",
-    "@type": "GovernmentPermit",
-    "name": "Licensed Gold Exporters Kampala - Mineral Dealers Africa",
-    "description": "Licensed gold exporters Kampala compliant with the Uganda Mining Act 2022. Operating gold export and smelting clearance desks at Entebbe airport.",
-    "issuedBy": {
-      "@type": "GovernmentOrganization",
-      "name": "Directorate of Geological Survey and Mines (DGSM) Uganda"
-    },
-    "permitType": "Class A Mineral Dealer & Refined Gold Export License",
-    "validIn": {
-      "@type": "AdministrativeArea",
-      "name": "Uganda"
-    },
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Mineral Dealers Africa (MDA)",
-      "image": "https://mineraldealersafrica.com/assets/og-image-luxury-gold.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Plot 429, Lubowa Estate, Sseguku, Off Entebbe Road",
-        "addressLocality": "Kampala",
-        "addressCountry": "UG"
+    "@graph": [
+      {
+        "@type": "GovernmentPermit",
+        "name": "Licensed Gold Exporters Kampala - Mineral Dealers Africa",
+        "description": "Licensed gold exporters Kampala compliant with the Uganda Mining Act 2022. Operating gold export and smelting clearance desks at Entebbe airport.",
+        "issuedBy": {
+          "@type": "GovernmentOrganization",
+          "name": "Directorate of Geological Survey and Mines (DGSM) Uganda"
+        },
+        "permitType": "Class A Mineral Dealer & Refined Gold Export License",
+        "validIn": {
+          "@type": "AdministrativeArea",
+          "name": "Uganda"
+        },
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Mineral Dealers Africa (MDA)",
+          "image": "https://mineraldealersafrica.com/assets/og-image-luxury-gold.jpg",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Plot 429, Lubowa Estate, Sseguku, Off Entebbe Road",
+            "addressLocality": "Kampala",
+            "addressCountry": "UG"
+          },
+          "telephone": "+256-762-079775"
+        }
       },
-      "telephone": "+256-762-079775"
-    }
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does the Uganda Mining Act 2022 regulate gold exports and trading in Kampala?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under the Uganda Mining Act 2022, all physical mineral trading, smelting, and international exports are strictly governed by mandatory state licensing frameworks, including Class A Mineral Dealer and Refined Gold Export permits. As one of the premier licensed gold exporters Kampala accommodates, Mineral Dealers Africa conducts on-ground operations in absolute compliance with these requirements, ensuring all export taxes and clearance declarations are legally filed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is an LBMA-standard gold export and how is compliance validated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An LBMA-standard gold export represents refined precious metal shipped internationally at 99.99% investment-grade purity, validated via double-blind fire assay testing at verified government laboratories such as the Directorate of Geological Survey and Mines (DGSM). We assist physical gold buyers by coordinating safe passage from our Kampala headquarters clearing desk directly to armored carrier holds at Entebbe terminal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the Uganda Mining Act 2022 protect international buyers from unlicensed brokers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Uganda Mining Act 2022 criminalizes unlicensed trading, hotel corridor negotiations, and back-room cash brokers. To protect buyer capital and guarantee sovereign sourcing standards, all premium negotiations must be executed inside authorized corporate offices, certified refining suites, or bank chambers under safe, sovereign escrow bank safeguards."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What certifications are required for a legal mineral shipment out of Entebbe Airport?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every compliant export shipment requires an official mineral export permit issued by the Ministry, certified DGSM purity assays, a legitimate customs clearance ticket, fully settled royalty payment tax certificates, and verified Kimberley / OECD origin trail credentials. Our logistics unit coordinates this complete package for safe international transit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can foreign family offices buy direct from artisanal mining cooperatives?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Foreign entities cannot purchase directly from hand-scale miners without custom Class A dealer authority. Under the Uganda Mining Act 2022, international offices must utilize registered regulatory conduits like Mineral Dealers Africa to bridge negotiations, monitor regional assays, clear statutory duties, and secure LBMA-standard gold export clearance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are mineral pure weight, Karats, and assays officially determined in East Africa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Purity levels are checked through state-of-the-art X-ray fluorescence (XRF) spectrography and classic fire assays at the official DGSM laboratories in Entebbe. This provides full regulatory and legal grading protection, ensuring independent chemical proof of purity before secure escrow funds release to sellers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What transport and security precautions protect premium precious metals?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We maintain strategic partnerships with premier armored security couriers (e.g., G4S or Brinks). Consignments are convoyed from protected vaults in Kampala under heavy security directly to security clearance areas at Entebbe International Airport, ensuring safe transit to carrier holds."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do sovereign escrow accounts secure gold procurement contracts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Escrow structures shield purchasing capital throughout the assay process. Your funds remain guarded in tier-1 bank custody while the state laboratories perform physical double-blind assays. Settlement is unlocked only after the certification process conforms fully to contract parameters."
+            }
+          }
+        ]
+      }
+    ]
   };
 
   return (
@@ -60,6 +178,97 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
         ]}
         schemaJson={homeSchema}
       />
+
+      {/* AUTO-PLAYING IMAGE SLIDER SECTION */}
+      <section className="relative w-full h-[320px] sm:h-[400px] md:h-[450px] rounded-3xl overflow-hidden border border-[#D4AF37]/20 shadow-[0_15px_45px_rgba(0,0,0,0.7),0_0_20px_rgba(212,175,55,0.02)] group mt-2" id="home-luxury-slider">
+        {/* Slides Frame */}
+        <div className="absolute inset-0 w-full h-full">
+          {slides.map((slide, index) => {
+            const isActive = index === currentSlide;
+            return (
+              <div
+                key={index}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                  isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                }`}
+              >
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover transition-transform duration-[6000ms] ease-linear scale-100 group-hover:scale-[1.03]"
+                  referrerPolicy="no-referrer"
+                />
+                
+                {/* Cinema Safe Gradient Dark Overlay for superior text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/35 md:from-black/90 md:via-black/60 md:to-transparent z-10" />
+                
+                {/* Ambient glowing gold backdrop inside each slide */}
+                <div className="absolute top-[-30%] left-[-10%] w-[50%] h-[120%] rounded-full bg-[#D4AF37]/3.5 blur-[120px] pointer-events-none z-20" />
+
+                {/* Left Aligned Premium Content Overlay */}
+                <div className="absolute inset-x-0 bottom-0 top-0 z-20 flex flex-col justify-center px-6 sm:px-12 md:px-16 text-left max-w-2xl">
+                  <div className="flex flex-col gap-3">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/60 border border-[#D4AF37]/25 text-[#D4AF37] text-[8px] sm:text-[9px] uppercase font-mono tracking-[0.2em] font-extrabold self-start shadow-[0_0_15px_rgba(212,175,55,0.06)]">
+                      <span className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-pulse" />
+                      <span>{slide.tag}</span>
+                    </span>
+                    
+                    <h2 className="font-serif font-black text-xl sm:text-2xl md:text-3xl text-white tracking-tight leading-tight">
+                      {slide.title}
+                    </h2>
+
+                    <p className="text-[11px] sm:text-xs text-white/70 font-light leading-relaxed max-w-lg">
+                      {slide.description}
+                    </p>
+
+                    <div className="flex gap-4 mt-1.5">
+                      <button
+                        onClick={() => onInquireGeneral(`Sourcing Inquiry initiated from Home Slider: ${slide.tag}`)}
+                        className="px-4 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] hover:from-[#f3cd57] hover:to-[#cd9f25] text-black font-extrabold uppercase tracking-widest text-[9px] rounded-sm shadow-md transition-all active:scale-95 cursor-pointer"
+                      >
+                        File Compliance Order
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Minimal High-End Manual Hover Controls */}
+        <button
+          onClick={handlePrevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 h-9 w-9 rounded-full border border-white/10 bg-black/55 hover:bg-[#D4AF37] text-white hover:text-black hover:border-[#D4AF37] flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+          aria-label="Previous Slide"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+        <button
+          onClick={handleNextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 h-9 w-9 rounded-full border border-white/10 bg-black/55 hover:bg-[#D4AF37] text-white hover:text-black hover:border-[#D4AF37] flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+          aria-label="Next Slide"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+
+        {/* Thin Luxury Progress/Paging Indicators */}
+        <div className="absolute bottom-6 right-6 sm:right-12 md:right-16 z-30 flex gap-2">
+          {slides.map((_, index) => {
+            const isActive = index === currentSlide;
+            return (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-1 rounded-full transition-all duration-500 cursor-pointer ${
+                  isActive ? 'w-7 bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.5)]' : 'w-1.5 bg-white/30 hover:bg-white/50'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            );
+          })}
+        </div>
+      </section>
 
       {/* HERO SECTION */}
       <section className="relative overflow-hidden py-16 lg:py-24" id="corporate-hero">
