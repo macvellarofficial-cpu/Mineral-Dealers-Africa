@@ -1,33 +1,51 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Phone, Mail, Award, ShieldCheck, MapPin, TrendingUp, TrendingDown } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CompanyLogo from './CompanyLogo';
 import { useGoldPrice } from '../hooks/useGoldPrice';
 
 interface HeaderProps {
-  currentTab: string;
-  setCurrentTab: (tab: string) => void;
   onRequestConsultation: () => void;
 }
 
-export default function Header({ currentTab, setCurrentTab, onRequestConsultation }: HeaderProps) {
+export default function Header({ onRequestConsultation }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { pricePerOunce, change24h, source } = useGoldPrice(40000);
+  
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Map pathname to active tab item ID
+  const getActiveTab = () => {
+    const path = location.pathname;
+    if (path === '/' || path === '') return 'home';
+    if (path.startsWith('/about')) return 'about';
+    if (path.startsWith('/services')) return 'services';
+    if (path.startsWith('/marketplace')) return 'marketplace';
+    if (path.startsWith('/miners')) return 'miners';
+    if (path.startsWith('/education')) return 'education';
+    if (path.startsWith('/investor')) return 'investor';
+    if (path.startsWith('/blog')) return 'blog';
+    if (path.startsWith('/contact')) return 'contact';
+    return '';
+  };
+
+  const currentTab = getActiveTab();
 
   const navigationItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Us' },
-    { id: 'services', label: 'Services' },
-    { id: 'marketplace', label: 'Marketplace' },
-    { id: 'miners', label: 'For Miners' },
-    { id: 'education', label: 'Education Center' },
-    { id: 'investor', label: 'Investor Center' },
-    { id: 'blog', label: 'Blog' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'home', label: 'Home', path: '/' },
+    { id: 'about', label: 'About Us', path: '/about' },
+    { id: 'services', label: 'Services', path: '/services' },
+    { id: 'marketplace', label: 'Marketplace', path: '/marketplace' },
+    { id: 'miners', label: 'For Miners', path: '/miners' },
+    { id: 'education', label: 'Education Center', path: '/education' },
+    { id: 'investor', label: 'Investor Center', path: '/investor' },
+    { id: 'blog', label: 'Blog', path: '/blog' },
+    { id: 'contact', label: 'Contact', path: '/contact' }
   ];
 
-  const handleNavClick = (tabId: string) => {
-    setCurrentTab(tabId);
+  const handleNavClick = () => {
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -94,22 +112,24 @@ export default function Header({ currentTab, setCurrentTab, onRequestConsultatio
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           
           {/* Corporate Brand Identity */}
-          <button 
-            onClick={() => handleNavClick('home')}
+          <Link 
+            to="/"
+            onClick={handleNavClick}
             className="flex items-center gap-3.5 text-left group transition-transform focus:outline-none cursor-pointer"
             id="nav-logo-btn"
           >
             <CompanyLogo variant="horizontal" iconSize={42} />
-          </button>
+          </Link>
 
           {/* Desktop Navigation Link Cluster */}
           <div className="hidden lg:flex items-center gap-1">
             {navigationItems.map((item) => {
               const isActive = currentTab === item.id;
               return (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => handleNavClick(item.id)}
+                  to={item.path}
+                  onClick={handleNavClick}
                   id={`nav-item-${item.id}`}
                   className={`px-3.5 py-2 text-xs uppercase tracking-widest font-semibold rounded-md transition-all relative ${
                     isActive 
@@ -125,7 +145,7 @@ export default function Header({ currentTab, setCurrentTab, onRequestConsultatio
                       transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                     />
                   )}
-                </button>
+                </Link>
               );
             })}
           </div>
@@ -169,17 +189,18 @@ export default function Header({ currentTab, setCurrentTab, onRequestConsultatio
               {navigationItems.map((item) => {
                 const isActive = currentTab === item.id;
                 return (
-                  <button
+                  <Link
                     key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className={`w-full text-left px-4 py-3 rounded text-sm font-semibold uppercase tracking-widest transition-all ${
+                    to={item.path}
+                    onClick={handleNavClick}
+                    className={`w-full text-left px-4 py-3 rounded text-sm font-semibold uppercase tracking-widest transition-all block ${
                       isActive 
                         ? 'text-[#D4AF37] bg-[#D4AF37]/10 border-l-4 border-[#D4AF37] pl-3' 
                         : 'text-gray-300 hover:text-[#D4AF37] hover:bg-white/5'
                     }`}
                   >
                     {item.label}
-                  </button>
+                  </Link>
                 );
               })}
               

@@ -1,17 +1,15 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Clock, Facebook, Instagram, Shield, HelpCircle, FileText } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Facebook, Instagram, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import CompanyLogo from './CompanyLogo';
 
 interface FooterProps {
-  currentTab: string;
-  setCurrentTab: (tab: string) => void;
   onRequestConsultation: () => void;
 }
 
-export default function Footer({ currentTab, setCurrentTab, onRequestConsultation }: FooterProps) {
+export default function Footer({ onRequestConsultation }: FooterProps) {
   
-  const handleNavClick = (tabId: string) => {
-    setCurrentTab(tabId);
+  const handleNavClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -39,24 +37,26 @@ export default function Footer({ currentTab, setCurrentTab, onRequestConsultatio
           <h3 className="font-sans font-semibold text-white tracking-widest uppercase text-xs mb-6 border-l-2 border-[#D4AF37] pl-3">
             Navigation Hub
           </h3>
-          <ul className="space-y-3.5 text-sm">
+          <ul className="space-y-3.5 text-sm font-light">
             {[
-              { id: 'about', label: 'Who We Are' },
-              { id: 'services', label: 'Consultancy Services' },
-              { id: 'marketplace', label: 'Amazon Mineral Portal' },
-              { id: 'miners', label: 'African Miner Hub' },
-              { id: 'education', label: 'Buyer Legal Guides' },
-              { id: 'investor', label: 'Investor Briefs' },
-              { id: 'blog', label: 'SEO Market Blog' }
+              { path: '/about', label: 'Who We Are' },
+              { path: '/services', label: 'Consultancy Services' },
+              { path: '/marketplace', label: 'Amazon Mineral Portal' },
+              { path: '/miners', label: 'African Miner Hub' },
+              { path: '/education', label: 'Buyer Legal Guides' },
+              { path: '/investor', label: 'Investor Briefs' },
+              { path: '/blog', label: 'SEO Market Journal' },
+              { path: '/contact', label: 'Contact Us' }
             ].map((link) => (
-              <li key={link.id}>
-                <button
-                  onClick={() => handleNavClick(link.id)}
-                  className="hover:text-[#D4AF37] text-white/60 hover:translate-x-1.5 transition-all text-left focus:outline-none flex items-center gap-1.5 cursor-pointer"
+              <li key={link.path}>
+                <Link
+                  to={link.path}
+                  onClick={handleNavClick}
+                  className="hover:text-[#D4AF37] text-white/60 hover:translate-x-1.5 transition-all text-left flex items-center gap-1.5 cursor-pointer block"
                 >
                   <span className="text-[#D4AF37] font-mono text-[10px]">›</span>
                   <span>{link.label}</span>
-                </button>
+                </Link>
               </li>
             ))}
           </ul>

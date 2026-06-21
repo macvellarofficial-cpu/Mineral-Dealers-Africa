@@ -5,18 +5,19 @@ import { Inquiry, MineralListing } from '../types';
 
 interface InquiryModalProps {
   mineral: MineralListing | null; // null represents general consultancy inquiry
+  preselectedContext?: string;
   onClose: () => void;
   onSubmit: (inquiry: Omit<Inquiry, 'id' | 'date'>) => void;
 }
 
-export default function InquiryModal({ mineral, onClose, onSubmit }: InquiryModalProps) {
+export default function InquiryModal({ mineral, preselectedContext, onClose, onSubmit }: InquiryModalProps) {
   const [buyerName, setBuyerName] = useState('');
   const [buyerEmail, setBuyerEmail] = useState('');
   const [buyerPhone, setBuyerPhone] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [quantityRequired, setQuantityRequired] = useState('');
   const [preferredTerms, setPreferredTerms] = useState<'FOB' | 'CIF'>('FOB');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(preselectedContext || '');
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {

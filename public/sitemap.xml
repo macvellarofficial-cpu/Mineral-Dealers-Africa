@@ -2,8 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mineraldealersafrica.com/</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/about</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/services</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/marketplace</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/miners</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/education</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/investor</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/blog</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://mineraldealersafrica.com/contact</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
   </url>
 </urlset>
