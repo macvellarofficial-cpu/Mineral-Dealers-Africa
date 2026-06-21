@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, ArrowRight, ShieldCheck, Award, Star, HelpCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 // @ts-ignore
 import goldBarsImg from '../assets/images/gold_bars_uganda_1781900099865.jpg';
 // @ts-ignore
@@ -19,6 +20,7 @@ interface HomeProps {
 }
 
 export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
+  const { t } = useLanguage();
   // Slider state and slide configurations
   const slides = [
     {
@@ -276,17 +278,17 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
           
           {/* Hero messages and tags */}
           <div className="lg:col-span-7 flex flex-col gap-6 text-left relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-[#D4AF37]/25 text-[#D4AF37] text-[10px] uppercase font-mono tracking-[0.15em] font-semibold self-start shadow-[0_0_15px_rgba(212,175,55,0.08)] backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-[#D4AF37]/25 text-[#D4AF37] text-[10px] uppercase font-mono tracking-[0.15em] font-semibold self-start shadow-[0_0_15px_rgba(212,175,55,0.08)] backdrop-blur-md animate-fade-in">
               <Sparkles className="h-3.5 w-3.5 animate-pulse text-[#D4AF37] gold-glow-icon" />
-              <span className="gold-glow">Africa's Verified Sovereign Sourcing Pipeline</span>
+              <span className="gold-glow">{t('hero.badge')}</span>
             </div>
 
             <h1 className="font-serif font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]">
-              Connecting Global Investors to Africa's Most <span className="gold-text-gradient gold-glow">Valuable Mineral</span> Opportunities
+              {t('hero.title')}
             </h1>
 
             <p className="text-sm md:text-base text-gray-400 font-light leading-relaxed max-w-xl">
-              Fully **Uganda Mining Act 2022 Compliant**. Trusted sourcing, compliance vetting, independent due diligence consultancy, and secured export logistics facilitation for gold, diamonds, and gemstones across East Africa. Managed from our **Kampala Headquarters Refining & Clearing Desk**.
+              {t('hero.desc')}
             </p>
 
             {/* High conversion call-to-actions */}
@@ -295,14 +297,14 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
                 onClick={() => onInquireGeneral('General Sourcing consultation inquiry launched from Hero')}
                 className="px-6 py-3.5 luxury-gold-button text-black font-extrabold uppercase tracking-widest text-xs rounded-sm cursor-pointer flex items-center gap-2 group transition-all active:scale-95"
               >
-                <span>Request Consultation</span>
+                <span>{t('nav.cta')}</span>
                 <ArrowRight className="h-4 w-4 shrink-0 text-black group-hover:translate-x-1 transition-transform" />
               </button>
               <button
                 onClick={() => onNavigate('/marketplace')}
                 className="px-6 py-3.5 border border-white/10 hover:border-[#D4AF37]/50 text-white rounded-sm text-xs font-bold uppercase tracking-widest bg-white/5 hover:bg-black/40 transition-all cursor-pointer"
               >
-                Explore Marketplace
+                {t('hero.primary')}
               </button>
             </div>
 
