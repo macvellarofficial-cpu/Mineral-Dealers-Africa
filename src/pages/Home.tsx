@@ -166,18 +166,10 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
     <div className="flex flex-col gap-16" id="home-page-layout">
       {/* Dynamic SEO Injector for Home */}
       <SEO
-        title="Licensed Gold Exporters Kampala | Mineral Dealers Africa"
-        description="Africa's Verified Sovereign Sourcing Pipeline. Uganda Mining Act 2022 Compliant. Secure on-site Kampala Headquarters Refining, Clearing Desk, and EBB export."
+        title={t('seo.home.title')}
+        description={t('seo.home.desc')}
         canonicalUrl="https://mineraldealersafrica.com/"
-        keywords={[
-          "Licensed gold exporters Kampala",
-          "Uganda Mining Act 2022 Compliant",
-          "Kampala Headquarters Refining",
-          "LBMA-standard gold export Uganda",
-          "Sovereign Sourcing Pipeline Africa",
-          "Ugandan gold nuggets documentation",
-          "Kampala gold smelting desk"
-        ]}
+        keywords={t('seo.home.keywords').split(',').map(s => s.trim())}
         schemaJson={homeSchema}
       />
 

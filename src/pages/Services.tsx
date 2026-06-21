@@ -1,12 +1,14 @@
 import React from 'react';
 import ServicesLayout from '../components/ServicesLayout';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface ServicesProps {
   onInquireService: (serviceName: string) => void;
 }
 
 export default function Services({ onInquireService }: ServicesProps) {
+  const { t } = useLanguage();
   const servicesSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -48,17 +50,10 @@ export default function Services({ onInquireService }: ServicesProps) {
     <div className="w-full" id="services-page-layout">
       {/* Dynamic SEO Injector for Services */}
       <SEO
-        title="Gold Sourcing & Assay Services Kampala | Mineral Dealers Africa"
-        description="Explore 12 institutional mineral services: licensed gold export in Uganda, spectrograph assaying, secure logistics escort, and Uganda Mining Act 2022 compliant due diligence."
+        title={t('seo.services.title')}
+        description={t('seo.services.desc')}
         canonicalUrl="https://mineraldealersafrica.com/services"
-        keywords={[
-          "LBMA-standard gold export Uganda",
-          "Licensed gold exporters Kampala",
-          "Spectrograph Assaying Entebbe",
-          "Uganda Mining Act 2022 compliant",
-          "Refinery coordination Kampala",
-          "Gold customs clearing Entebbe airport"
-        ]}
+        keywords={t('seo.services.keywords').split(',').map(s => s.trim())}
         schemaJson={servicesSchema}
       />
 

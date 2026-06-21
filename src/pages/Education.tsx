@@ -1,8 +1,10 @@
 import React from 'react';
 import EducationCenterComponent from '../components/EducationCenter';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function Education() {
+  const { t } = useLanguage();
   const educationSchema = {
     "@context": "https://schema.org",
     "@type": "EducationEvent",
@@ -22,17 +24,10 @@ export default function Education() {
     <div className="w-full" id="education-page-layout">
       {/* Dynamic SEO Injector for Education */}
       <SEO
-        title="Mineral Buyer Education Academy | Mineral Dealers Africa"
-        description="Familiarize yourself with Uganda Mining Act 2022. Master gold nuggets, doré bars documentation, DGSM assay auditing, and custom clearance pathways."
+        title={t('seo.education.title')}
+        description={t('seo.education.desc')}
         canonicalUrl="https://mineraldealersafrica.com/education"
-        keywords={[
-          "Ugandan gold nuggets documentation",
-          "Uganda Mining Act 2022 Compliant",
-          "LBMA-standard gold export Uganda",
-          "Licensed gold exporters Kampala",
-          "Escrow gold purchase safeties",
-          "Entebbe DGSM assay guidelines"
-        ]}
+        keywords={t('seo.education.keywords').split(',').map(s => s.trim())}
         schemaJson={educationSchema}
       />
 

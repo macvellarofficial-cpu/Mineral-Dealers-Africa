@@ -1,12 +1,14 @@
 import React from 'react';
 import { Award, ShieldAlert, Sparkles } from 'lucide-react';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface ForMinersProps {
   onNavigate: (path: string) => void;
 }
 
 export default function ForMiners({ onNavigate }: ForMinersProps) {
+  const { t } = useLanguage();
   const minersSchema = {
     "@context": "https://schema.org",
     "@type": "GovernmentService",
@@ -28,17 +30,10 @@ export default function ForMiners({ onNavigate }: ForMinersProps) {
     <div className="flex flex-col gap-10" id="for-miners-layout">
       {/* Dynamic SEO Injector for For Miners */}
       <SEO
-        title="For Miners & ASM Cooperatives | Mineral Dealers Africa"
-        description="Empowering licensed Ugandan ASM cooperatives. Clean on-boarding under the Uganda Mining Act 2022 guidelines to access international investment liquidity."
+        title={t('seo.miners.title')}
+        description={t('seo.miners.desc')}
         canonicalUrl="https://mineraldealersafrica.com/miners"
-        keywords={[
-          "Uganda Mining Act 2022 Compliant",
-          "Artisanal ASM gold cooperatives Kampala",
-          "Licensed gold exporters Kampala",
-          "Sovereign mineral sourcing pipeline Uganda",
-          "DGSM mining license validation",
-          "Gold nuggets and doré bars documentation"
-        ]}
+        keywords={t('seo.miners.keywords').split(',').map(s => s.trim())}
         schemaJson={minersSchema}
       />
 

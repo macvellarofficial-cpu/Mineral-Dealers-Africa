@@ -1,8 +1,10 @@
 import React from 'react';
 import BlogCenterComponent from '../components/BlogCenter';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function Blog() {
+  const { t } = useLanguage();
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -18,17 +20,10 @@ export default function Blog() {
     <div className="w-full" id="blog-page-layout">
       {/* Dynamic SEO Injector for Blog */}
       <SEO
-        title="Africa Mineral Sourcing Journal & News | Mineral Dealers Africa"
-        description="Insights on ASM mineral compliance. Read expert reports on Uganda Mining Act 2022 compliance, state assaying, and LBMA-standard gold export laws."
+        title={t('seo.blog.title')}
+        description={t('seo.blog.desc')}
         canonicalUrl="https://mineraldealersafrica.com/blog"
-        keywords={[
-          "Uganda Mining Act 2022 Compliant",
-          "LBMA-standard gold export Uganda",
-          "Licensed gold exporters Kampala",
-          "African precious minerals journal",
-          "Sovereign sourcing blog Kampala",
-          "DGSM mineral policies news"
-        ]}
+        keywords={t('seo.blog.keywords').split(',').map(s => s.trim())}
         schemaJson={blogSchema}
       />
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import MarketplaceComponent from '../components/Marketplace';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 import { MineralListing } from '../types';
 
 interface MarketplacePageProps {
@@ -8,6 +9,7 @@ interface MarketplacePageProps {
 }
 
 export default function MarketplacePage({ onInquire }: MarketplacePageProps) {
+  const { t } = useLanguage();
   const marketplaceSchema = {
     "@context": "https://schema.org",
     "@type": "ItemPage",
@@ -44,17 +46,10 @@ export default function MarketplacePage({ onInquire }: MarketplacePageProps) {
     <div className="w-full" id="marketplace-page-layout">
       {/* Dynamic SEO Injector for Marketplace */}
       <SEO
-        title="Verified Gold & Mineral Marketplace | Mineral Dealers Africa"
-        description="Licensed gold exporters in Kampala. Browse 99.99% LBMA standard gold bars, gold nuggets, doré, and conflict-free diamonds with verified documentation."
+        title={t('seo.marketplace.title')}
+        description={t('seo.marketplace.desc')}
         canonicalUrl="https://mineraldealersafrica.com/marketplace"
-        keywords={[
-          "Licensed gold exporters Kampala",
-          "Ugandan gold nuggets documentation",
-          "LBMA-standard gold export Uganda",
-          "African sovereign sourcing pipeline",
-          "Verified mineral marketplace Kampala",
-          "Buy gold bars Kampala Uganda"
-        ]}
+        keywords={t('seo.marketplace.keywords').split(',').map(s => s.trim())}
         schemaJson={marketplaceSchema}
       />
 

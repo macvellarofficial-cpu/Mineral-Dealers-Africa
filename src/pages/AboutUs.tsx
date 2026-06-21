@@ -1,8 +1,10 @@
 import React from 'react';
 import { Award, ShieldCheck, MapPin } from 'lucide-react';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function AboutUs() {
+  const { t } = useLanguage();
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -26,17 +28,10 @@ export default function AboutUs() {
     <div className="flex flex-col gap-10" id="about-us-layout">
       {/* Dynamic SEO Injector for About Us */}
       <SEO
-        title="About Us | compliant with Uganda Mining Act 2022"
-        description="Learn about Mineral Dealers Africa, a licensed mineral dealer in Kampala, completely compliant with the Uganda Mining Act 2022 and LBMA export standards."
+        title={t('seo.about.title')}
+        description={t('seo.about.desc')}
         canonicalUrl="https://mineraldealersafrica.com/about"
-        keywords={[
-          "About Mineral Dealers Africa",
-          "Uganda Mining Act 2022 Compliant",
-          "Licensed gold exporters Kampala",
-          "Lubowa Estate Kampala headquarters",
-          "OECD Annex II Gold Standard",
-          "Entebbe DGSM Mineral Assaying"
-        ]}
+        keywords={t('seo.about.keywords').split(',').map(s => s.trim())}
         schemaJson={aboutSchema}
       />
 

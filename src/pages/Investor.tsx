@@ -1,12 +1,14 @@
 import React from 'react';
 import InvestorGuideComponent from '../components/InvestorGuide';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface InvestorProps {
   onInquire: () => void;
 }
 
 export default function Investor({ onInquire }: InvestorProps) {
+  const { t } = useLanguage();
   const investorSchema = {
     "@context": "https://schema.org",
     "@type": "InvestmentOrDepositScheme",
@@ -28,17 +30,10 @@ export default function Investor({ onInquire }: InvestorProps) {
     <div className="w-full" id="investor-page-layout">
       {/* Dynamic SEO Injector for Investor */}
       <SEO
-        title="Gold Investment & Sourcing Center | Mineral Dealers Africa"
-        description="Fiduciary mineral investment advisory. Secure physical gold arbitrage, mining concessions equipment funding, and Uganda Mining Act 2022 compliant escrows."
+        title={t('seo.investor.title')}
+        description={t('seo.investor.desc')}
         canonicalUrl="https://mineraldealersafrica.com/investor"
-        keywords={[
-          "Uganda Mining Act 2022 Compliant",
-          "Licensed gold exporters Kampala",
-          "Gold investment advisory Uganda",
-          "Corporate assay audits Kampala desk",
-          "Family office sovereign gold sourcing",
-          "East African mining joint-ventures"
-        ]}
+        keywords={t('seo.investor.keywords').split(',').map(s => s.trim())}
         schemaJson={investorSchema}
       />
 

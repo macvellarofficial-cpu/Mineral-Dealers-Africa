@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, Shield, Info, Clock } from 'lucide-react';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [name, setName] = useState('');
   const [org, setOrg] = useState('');
   const [phone, setPhone] = useState('');
@@ -54,17 +56,10 @@ export default function Contact() {
     <div className="flex flex-col gap-10 text-left" id="contact-us-layout">
       {/* Dynamic SEO Injector for Contact */}
       <SEO
-        title="Contact Verified Kampala Refiners | Mineral Dealers Africa"
-        description="Lodge physical mineral sourcing briefs with Mineral Dealers Africa. Compliant Kampala headquarters smelting desk. Verified phone +256762079775."
+        title={t('seo.contact.title')}
+        description={t('seo.contact.desc')}
         canonicalUrl="https://mineraldealersafrica.com/contact"
-        keywords={[
-          "Kampala gold export refining clearing desk",
-          "Lubowa Estate Kampala headquarters Address",
-          "Licensed gold exporters Kampala Phone",
-          "Uganda Mining Act 2022 Contact Desk",
-          "Buy physical Gold Uganda documentation help",
-          "Verified escrow precious metals inquiry"
-        ]}
+        keywords={t('seo.contact.keywords').split(',').map(s => s.trim())}
         schemaJson={contactSchema}
       />
 

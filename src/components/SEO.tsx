@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface SEOProps {
   title: string;
@@ -17,7 +18,12 @@ export default function SEO({
   keywords = [],
   schemaJson
 }: SEOProps) {
+  const { lang } = useLanguage();
+
   useEffect(() => {
+    // Update HTML root element attribute
+    document.documentElement.setAttribute('lang', lang);
+
     // 1. Update document title
     document.title = title;
 
@@ -87,7 +93,7 @@ export default function SEO({
         script.remove();
       }
     };
-  }, [title, description, canonicalUrl, ogType, keywords, schemaJson]);
+  }, [title, description, canonicalUrl, ogType, keywords, schemaJson, lang]);
 
   return null; // Side-effect only component
 }
