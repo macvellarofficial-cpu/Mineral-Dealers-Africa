@@ -2,12 +2,14 @@ import React from 'react';
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CompanyLogo from './CompanyLogo';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface FooterProps {
   onRequestConsultation: () => void;
 }
 
 export default function Footer({ onRequestConsultation }: FooterProps) {
+  const { getLocalizedLink } = useLanguage();
   
   const handleNavClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -50,7 +52,7 @@ export default function Footer({ onRequestConsultation }: FooterProps) {
             ].map((link) => (
               <li key={link.path}>
                 <Link
-                  to={link.path}
+                  to={getLocalizedLink(link.path)}
                   onClick={handleNavClick}
                   className="hover:text-[#D4AF37] text-white/60 hover:translate-x-1.5 transition-all text-left flex items-center gap-1.5 cursor-pointer block"
                 >

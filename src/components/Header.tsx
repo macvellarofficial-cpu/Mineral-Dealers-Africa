@@ -17,7 +17,7 @@ export default function Header({ onRequestConsultation }: HeaderProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { lang, changeLanguage, t, languages } = useLanguage();
+  const { lang, changeLanguage, t, languages, getLocalizedLink } = useLanguage();
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastContent, setToastContent] = useState({ title: '', desc: '', flag: '🇬🇧' });
@@ -154,7 +154,7 @@ export default function Header({ onRequestConsultation }: HeaderProps) {
           
           {/* Corporate Brand Identity */}
           <Link 
-            to="/"
+            to={getLocalizedLink('/')}
             onClick={handleNavClick}
             className="flex items-center gap-3.5 text-left group transition-transform focus:outline-none cursor-pointer"
             id="nav-logo-btn"
@@ -169,7 +169,7 @@ export default function Header({ onRequestConsultation }: HeaderProps) {
               return (
                 <Link
                   key={item.id}
-                  to={item.path}
+                  to={getLocalizedLink(item.path)}
                   onClick={handleNavClick}
                   id={`nav-item-${item.id}`}
                   className={`px-3.5 py-2 text-xs uppercase tracking-widest font-semibold rounded-md transition-all relative ${
@@ -306,7 +306,7 @@ export default function Header({ onRequestConsultation }: HeaderProps) {
                 return (
                   <Link
                     key={item.id}
-                    to={item.path}
+                    to={getLocalizedLink(item.path)}
                     onClick={handleNavClick}
                     className={`w-full text-left px-4 py-2.5 rounded text-xs font-semibold uppercase tracking-widest transition-all block ${
                       isActive 

@@ -18,9 +18,11 @@ import Contact from './pages/Contact';
 
 // Types
 import { MineralListing, Inquiry } from './types';
+import { useLanguage } from './hooks/useLanguage';
 
 function AppContent() {
   const navigate = useNavigate();
+  const { getLocalizedLink } = useLanguage();
   const [activeInquiryMineral, setActiveInquiryMineral] = useState<MineralListing | null>(null);
   const [showInquiryModal, setShowInquiryModal] = useState<boolean>(false);
   const [preselectedInquiryContext, setPreselectedInquiryContext] = useState<string>('');
@@ -67,39 +69,43 @@ function AppContent() {
       {/* Main Corporate Workspace container */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-8 flex flex-col gap-12 relative z-10" id="main-corporate-workspace">
         <Routes>
-          <Route 
-            path="/" 
-            element={
-              <Home 
-                onInquireGeneral={handleInquireGeneral} 
-                onNavigate={(path) => { navigate(path); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
+          {['', '/:lang'].map((prefix) => (
+            <React.Fragment key={prefix}>
+              <Route 
+                path={`${prefix}/`} 
+                element={
+                  <Home 
+                    onInquireGeneral={handleInquireGeneral} 
+                    onNavigate={(path) => { navigate(getLocalizedLink(path)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
+                  />
+                } 
               />
-            } 
-          />
-          <Route path="/about" element={<AboutUs />} />
-          <Route 
-            path="/services" 
-            element={<Services onInquireService={(serviceName) => handleInquireGeneral(`Service Briefing Request: ${serviceName}`)} />} 
-          />
-          <Route 
-            path="/marketplace" 
-            element={<MarketplacePage onInquire={handleInquireListing} />} 
-          />
-          <Route 
-            path="/miners" 
-            element={
-              <ForMiners 
-                onNavigate={(path) => { navigate(path); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
+              <Route path={`${prefix}/about`} element={<AboutUs />} />
+              <Route 
+                path={`${prefix}/services`} 
+                element={<Services onInquireService={(serviceName) => handleInquireGeneral(`Service Briefing Request: ${serviceName}`)} />} 
               />
-            } 
-          />
-          <Route path="/education" element={<Education />} />
-          <Route 
-            path="/investor" 
-            element={<Investor onInquire={() => handleInquireGeneral('Sovereign Investor consultation briefing requested')} />} 
-          />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
+              <Route 
+                path={`${prefix}/marketplace`} 
+                element={<MarketplacePage onInquire={handleInquireListing} />} 
+              />
+              <Route 
+                path={`${prefix}/miners`} 
+                element={
+                  <ForMiners 
+                    onNavigate={(path) => { navigate(getLocalizedLink(path)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
+                  />
+                } 
+              />
+              <Route path={`${prefix}/education`} element={<Education />} />
+              <Route 
+                path={`${prefix}/investor`} 
+                element={<Investor onInquire={() => handleInquireGeneral('Sovereign Investor consultation briefing requested')} />} 
+              />
+              <Route path={`${prefix}/blog`} element={<Blog />} />
+              <Route path={`${prefix}/contact`} element={<Contact />} />
+            </React.Fragment>
+          ))}
         </Routes>
       </main>
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export type LanguageCode = 'en' | 'fr' | 'ar' | 'lg' | 'sw' | 'zh';
 
@@ -18,36 +18,47 @@ export const LANGUAGES: LanguageOption[] = [
   { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' }
 ];
 
-const LANGUAGE_CHANGE_EVENT = 'mda-language-changed';
+export const VALID_LANG_CODES: LanguageCode[] = ['fr', 'ar', 'lg', 'sw', 'zh'];
 
-export function getStoredLanguage(): LanguageCode {
-  if (typeof window === 'undefined') return 'en';
-  const saved = localStorage.getItem('mda-selected-language') as LanguageCode;
-  if (saved && ['en', 'fr', 'ar', 'lg', 'sw', 'zh'].includes(saved)) {
-    return saved;
+export function getLangFromPath(pathname: string): LanguageCode {
+  const parts = pathname.split('/');
+  const firstSegment = parts[1];
+  if (firstSegment && VALID_LANG_CODES.includes(firstSegment as any)) {
+    return firstSegment as LanguageCode;
   }
   return 'en';
 }
 
+export function getLocalizedPath(currentPath: string, targetLang: LanguageCode): string {
+  const parts = currentPath.split('/');
+  const firstSegment = parts[1];
+  
+  let strippedPath = currentPath;
+  if (firstSegment && VALID_LANG_CODES.includes(firstSegment as any)) {
+    strippedPath = '/' + parts.slice(2).join('/');
+  }
+  
+  if (targetLang === 'en') {
+    return strippedPath === '' ? '/' : strippedPath;
+  } else {
+    const prefix = `/${targetLang}`;
+    if (strippedPath === '/' || strippedPath === '') {
+      return prefix;
+    }
+    return `${prefix}${strippedPath}`;
+  }
+}
+
 export function useLanguage() {
-  const [lang, setLang] = useState<LanguageCode>(getStoredLanguage());
-
-  useEffect(() => {
-    const handleLanguageChange = (e: CustomEvent<{ lang: LanguageCode }>) => {
-      setLang(e.detail.lang);
-    };
-
-    window.addEventListener(LANGUAGE_CHANGE_EVENT as any, handleLanguageChange);
-    return () => {
-      window.removeEventListener(LANGUAGE_CHANGE_EVENT as any, handleLanguageChange);
-    };
-  }, []);
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  const lang = getLangFromPath(location.pathname);
 
   const changeLanguage = (newLang: LanguageCode) => {
     localStorage.setItem('mda-selected-language', newLang);
-    setLang(newLang);
-    const event = new CustomEvent(LANGUAGE_CHANGE_EVENT, { detail: { lang: newLang } });
-    window.dispatchEvent(event);
+    const newPath = getLocalizedPath(location.pathname, newLang);
+    navigate(newPath);
   };
 
   const getTranslation = (key: string): string => {
@@ -55,7 +66,19 @@ export function useLanguage() {
     return dict[key] || TRANSLATIONS['en'][key] || key;
   };
 
-  return { lang, changeLanguage, t: getTranslation, languages: LANGUAGES };
+  const getLocalizedLink = (path: string): string => {
+    if (lang === 'en') return path;
+    if (path === '/') return `/${lang}`;
+    return `/${lang}${path.startsWith('/') ? path : '/' + path}`;
+  };
+
+  return { 
+    lang, 
+    changeLanguage, 
+    t: getTranslation, 
+    languages: LANGUAGES, 
+    getLocalizedLink 
+  };
 }
 
 // Compact and high-fidelity dictionary for key corporate messaging & components
