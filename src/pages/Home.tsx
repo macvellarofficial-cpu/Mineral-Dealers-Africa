@@ -228,34 +228,56 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
         </div>
       </section>
 
-      {/* QUICK FAQ ACCORDION SECTION */}
-      <section className="luxury-glass border border-[#D4AF37]/15 rounded-2xl p-6 md:p-8 flex flex-col gap-6" id="home-faqs">
-        <h3 className="font-serif text-xl font-bold text-white border-b border-[#D4AF37]/15 pb-4">Frequently Asked Questions</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* ROBUST SEO-OPTIMIZED FAQ SECTION */}
+      <section className="luxury-glass border border-[#D4AF37]/15 rounded-2xl p-6 md:p-8 flex flex-col gap-8" id="home-faqs">
+        <div className="flex flex-col gap-2 border-b border-[#D4AF37]/15 pb-4">
+          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] font-semibold">SEO & COMPLIANCE DIRECTIVES</span>
+          <h3 className="font-serif text-xl md:text-2xl font-bold text-white">Uganda Gold Export Security FAQs</h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
             {
-              q: "Can I buy gold directly from hotel suites in Kampala?",
-              a: "No. Legitimate dealers and verified cooperatives run trade negotiations exclusively inside licensed boardrooms, bank chambers, or official company offices. Hotel corridor sales are the signature of unverified operators."
+              q: "How does the Uganda Mining Act 2022 regulate gold exports and trading in Kampala?",
+              a: "Under the Uganda Mining Act 2022, all physical mineral trading, smelting, and international exports are strictly governed by mandatory state licensing frameworks, including Class A Mineral Dealer and Refined Gold Export permits. As one of the premier licensed gold exporters Kampala accommodates, Mineral Dealers Africa conducts on-ground operations in absolute compliance with these requirements, ensuring all export taxes and clearance declarations are legally filed."
             },
             {
-              q: "How is mineral purity officially assayed in Uganda?",
-              a: "Official chemical assay reports are generated at the Directorate of Geological Survey and Mines (DGSM) laboratories in Entebbe. Their labs utilize XRF spectrograph scans and fire testing assays."
+              q: "What is an LBMA-standard gold export and how is compliance validated?",
+              a: "An LBMA-standard gold export represents refined precious metal shipped internationally at 99.99% investment-grade purity, validated via double-blind fire assay testing at verified government laboratories such as the Directorate of Geological Survey and Mines (DGSM). We assist physical gold buyers by coordinating safe passage from our Kampala headquarters clearing desk directly to armored carrier holds at Entebbe terminal."
             },
             {
-              q: "What is your stance regarding conflict minerals?",
-              a: "Mineral Dealers Africa possesses a rigid anti-conflict protocol. All regional gold nuggets and doré bars documentation is traced directly back to their source ASM concessions to comply with OECD Due Diligence Guidelines."
+              q: "How does the Uganda Mining Act 2022 protect international buyers from unlicensed brokers?",
+              a: "The Uganda Mining Act 2022 criminalizes unlicensed trading, hotel corridor negotiations, and back-room cash brokers. To protect buyer capital and guarantee sovereign sourcing standards, all premium negotiations must be executed inside authorized corporate offices, certified refining suites, or bank chambers under safe, sovereign escrow bank safeguards."
             },
             {
-              q: "How are shipping logistics and customs managed?",
-              a: "We coordinate end-to-end transport with first-class armored couriers (e.g., G4S or Brinks). We manage royal declarations, pay export taxes under the Uganda Mining Act 2022, and issue official custom permits at Entebbe terminal."
+              q: "What certifications are required for a legal mineral shipment out of Entebbe Airport?",
+              a: "Every compliant export shipment requires an official mineral export permit issued by the Ministry, certified DGSM purity assays, a legitimate customs clearance ticket, fully settled royalty payment tax certificates, and verified Kimberley / OECD origin trail credentials. Our logistics unit coordinates this complete package for safe international transit."
+            },
+            {
+              q: "Can foreign family offices buy direct from artisanal mining cooperatives?",
+              a: "Foreign entities cannot purchase directly from hand-scale miners without custom Class A dealer authority. Under the Uganda Mining Act 2022, international offices must utilize registered regulatory conduits like Mineral Dealers Africa to bridge negotiations, monitor regional assays, clear statutory duties, and secure LBMA-standard gold export clearance."
+            },
+            {
+              q: "How are mineral pure weight, Karats, and assays officially determined in East Africa?",
+              a: "Purity levels are checked through state-of-the-art X-ray fluorescence (XRF) spectrography and classic fire assays at the official DGSM laboratories in Entebbe. This provides full regulatory and legal grading protection, ensuring independent chemical proof of purity before secure escrow funds release to sellers."
+            },
+            {
+              q: "What transport and security precautions protect premium precious metals?",
+              a: "We maintain strategic partnerships with premier armored security couriers (e.g., G4S or Brinks). Consignments are convoyed from protected vaults in Kampala under heavy security directly to security clearance areas at Entebbe International Airport, ensuring safe transit to carrier holds."
+            },
+            {
+              q: "How do sovereign escrow accounts secure gold procurement contracts?",
+              a: "Escrow structures shield purchasing capital throughout the assay process. Your funds remain guarded in tier-1 bank custody while the state laboratories perform physical double-blind assays. Settlement is unlocked only after the certification process conforms fully to contract parameters."
             }
           ].map((item, idx) => (
-            <div key={idx} className="flex flex-col gap-1.5 p-3.5 rounded-xl hover:bg-white/5 transition-all duration-300">
-              <h4 className="font-serif text-xs uppercase tracking-wider font-bold text-[#D4AF37] flex items-start gap-2">
+            <div key={idx} className="flex flex-col gap-2 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#D4AF37]/20 hover:bg-white/[0.04] transition-all duration-300">
+              <h4 className="font-serif text-sm font-bold text-[#D4AF37] flex items-start gap-2 leading-snug">
                 <HelpCircle className="h-4 w-4 text-[#D4AF37] shrink-0 mt-0.5 gold-glow-icon" />
                 <span>{item.q}</span>
               </h4>
-              <p className="text-xs text-white/60 leading-relaxed font-light pl-6">{item.a}</p>
+              <p className="text-xs text-white/70 leading-relaxed font-light pl-6">
+                {item.a}
+              </p>
             </div>
           ))}
         </div>
