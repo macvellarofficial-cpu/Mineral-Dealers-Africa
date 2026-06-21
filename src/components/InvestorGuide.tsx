@@ -1,39 +1,42 @@
 import React from 'react';
-import { ShieldCheck, TrendingUp, Landmark, FileCheck, Coins, HelpCircle, Briefcase } from 'lucide-react';
+import { ShieldCheck, Landmark } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function InvestorGuide({ onRequestConsultation }: { onRequestConsultation: () => void }) {
+  const { t } = useLanguage();
+
   const investorTiers = [
     {
-      title: "Physical Gold Arbitrage",
-      subtitle: "Direct Metal Procurement",
-      description: "Buy assayed alluvial nuggets or unrefined gold dust direct from local smallholder mines, and refine locally in Kampala to LBMA standards. MDA manages the provenance verification, transport secure escorts, and customs clearance.",
-      potential: "Highly Liquid Asset Reserve",
-      riskProfile: "Low (When verified on-ground)"
+      title: t('investor.tier1.title'),
+      subtitle: t('investor.tier1.subtitle'),
+      description: t('investor.tier1.desc'),
+      potential: t('investor.tier1.outcome'),
+      riskProfile: t('investor.tier1.risk')
     },
     {
-      title: "Mining Concessions & Equipment Finance",
-      subtitle: "Capital Joint-Ventures",
-      description: "Capital injection into licensed artisanal cooperatives in Uganda and Tanzania to scale mechanical capability (e.g. wet magnetic separation plants, excavators) in exchange for direct metal yield contracts.",
-      potential: "Exponential Yield Scaling",
-      riskProfile: "Medium (Requires strict escrow)"
+      title: t('investor.tier2.title'),
+      subtitle: t('investor.tier2.subtitle'),
+      description: t('investor.tier2.desc'),
+      potential: t('investor.tier2.outcome'),
+      riskProfile: t('investor.tier2.risk')
     }
   ];
 
   const proceduralPillars = [
     {
       step: "01",
-      title: "Establish Corporate Presence & KYC",
-      text: "Global buyers are registered into the Uganda Directorate portal (DGSM) and set up direct corporate banking channels to comply with anti-money laundering regulations."
+      title: t('investor.pillar1.title'),
+      text: t('investor.pillar1.desc')
     },
     {
       step: "02",
-      title: "Local Assay Auditing Integration",
-      text: "Never wire funds prior to neutral fire assays. Minerals must be brought to Kampala, sampled, and assayed in governmental labs under strict legal observation."
+      title: t('investor.pillar2.title'),
+      text: t('investor.pillar2.desc')
     },
     {
       step: "03",
-      title: "EBB Exit Customs & Clearance",
-      text: "All royalties (nominal 5% export tax on refined gold) must be paid, custom state certificates generated, and shipments sealed under double-custody rules."
+      title: t('investor.pillar3.title'),
+      text: t('investor.pillar3.desc')
     }
   ];
 
@@ -45,13 +48,13 @@ export default function InvestorGuide({ onRequestConsultation }: { onRequestCons
       {/* Top Professional Intelligence Card */}
       <div className="luxury-glass border border-[#D4AF37]/18 p-8 rounded-3xl relative overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5),0_0_20px_rgba(212,175,55,0.03)] z-10">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/3 blur-[100px] pointer-events-none"></div>
-        <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block mb-2 font-bold">SOVEREIGN CAPITAL RESOURCE</span>
+        <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block mb-2 font-bold">{t('investor.tag')}</span>
         <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-white leading-tight">
-          Strategic Mineral <span className="gold-text-gradient">Investor Center</span>
+          {t('investor.title')}
         </h2>
         <div className="gold-accent-line my-4 max-w-xs" />
         <p className="text-xs md:text-sm text-white/70 mt-2 max-w-xl leading-relaxed font-light">
-          Africa presents outstanding geological yield potential. We advise family offices, luxury jewel houses, commodity trading desks, and bullion buyers on safe capital deployment structures designed to reduce regulatory risk.
+          {t('investor.desc')}
         </p>
       </div>
 
@@ -61,7 +64,7 @@ export default function InvestorGuide({ onRequestConsultation }: { onRequestCons
         {/* Left: Investment Pathways */}
         <div className="lg:col-span-7 flex flex-col gap-6">
           <h3 className="font-serif text-xs uppercase tracking-widest font-extrabold text-white/50 border-l-2 border-[#D4AF37] pl-2.5">
-            Primary Investment Frameworks
+            {t('investor.frameworks')}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -92,10 +95,10 @@ export default function InvestorGuide({ onRequestConsultation }: { onRequestCons
             <ShieldCheck className="h-10 w-10 text-emerald-400 shrink-0 gold-glow-icon" />
             <div>
               <h4 className="font-serif text-xs uppercase tracking-widest font-extrabold text-emerald-400 mb-1">
-                Risk Management Protocol
+                {t('investor.protocol.title')}
               </h4>
               <p className="text-xs text-white/60 leading-relaxed font-light">
-                All physical gold procurement deals are managed through secure regional accounts and escrow trusts. Asset transactions remain pending until neutral spectrograph reports are generated and signed by both parties.
+                {t('investor.protocol.desc')}
               </p>
             </div>
           </div>
@@ -106,11 +109,11 @@ export default function InvestorGuide({ onRequestConsultation }: { onRequestCons
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Landmark className="h-5 w-5 text-[#D4AF37] gold-glow-icon" />
-              <h3 className="font-serif text-xs uppercase tracking-widest font-extrabold text-white/50">Sovereign Compliance Route</h3>
+              <h3 className="font-serif text-xs uppercase tracking-widest font-extrabold text-white/50">{t('investor.route.title')}</h3>
             </div>
             
             <p className="text-xs text-white/50 leading-normal mb-6 font-light">
-              We guide investors through standard domestic regulatory requirements for seamless international shipping operations.
+              {t('investor.route.desc')}
             </p>
 
             <div className="space-y-6">
@@ -134,14 +137,14 @@ export default function InvestorGuide({ onRequestConsultation }: { onRequestCons
 
           <div className="mt-8 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="text-[10px] text-white/40 font-mono">
-              <span className="block">Director of Investment Desk:</span>
-              <span className="text-[#D4AF37] font-semibold">Compliance Oversight Committee</span>
+              <span className="block">{t('investor.desk')}:</span>
+              <span className="text-[#D4AF37] font-semibold">{t('investor.committee')}</span>
             </div>
             <button
               onClick={onRequestConsultation}
               className="luxury-gold-button shrink-0 py-2.5 px-5 rounded-full text-[10px] tracking-widest font-extrabold shadow-[0_4px_15px_rgba(212,175,55,0.25)]"
             >
-              Get Trade Brief
+              {t('investor.cta')}
             </button>
           </div>
         </div>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BookOpen, ShieldAlert, AlertTriangle, Scale, CheckCircle2, ChevronRight, Search, FileText, Landmark } from 'lucide-react';
+import { BookOpen, ShieldAlert, Scale, ChevronRight, FileText, Landmark } from 'lucide-react';
 import { EDUCATION_GUIDES } from '../data/mineralData';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function EducationCenter() {
+  const { t } = useLanguage();
   const [selectedGuideId, setSelectedGuideId] = useState(EDUCATION_GUIDES[0].id);
-  const [searchQuery, setSearchQuery] = useState('');
 
   // Find active guide
   const activeGuide = EDUCATION_GUIDES.find(g => g.id === selectedGuideId) || EDUCATION_GUIDES[0];
@@ -13,34 +14,59 @@ export default function EducationCenter() {
   // Specific additional short FAQ/bullet structures demanded by the user
   const additionalEducationSections = [
     {
-      title: "Gold Export Regulations & Royalties",
-      content: "Under Ugandan DGSM policies re-instituted in the Mining Act of 2022, unprocessed gold exports are highly protected to promote regional refining. For refined gold (99.5%+), exporters must clear a 5% royal tax on bullion, obtain custom state export permits, and carry certified assay reports.",
+      title: t('education.additional.sec0.title'),
+      content: t('education.additional.sec0.desc'),
       icon: Landmark
     },
     {
-      title: "Understanding Gold Purity & Karat Weight",
-      content: "Physical gold in East Africa is mostly alluvial. Raw gold dust and nuggets generally test between 21K to 23K (87% to 96% pure gold). Pure investment bullion requires custom smelting and refining up to 24K (99.99% pure), performed inside verified local facilities.",
+      title: t('education.additional.sec1.title'),
+      content: t('education.additional.sec1.desc'),
       icon: Scale
     },
     {
-      title: "Export Documentation Checklist",
-      content: "A legal shipping container requires: 1) Valid Mineral Dealer License, 2) Official DGSM Export Permit, 3) Customs Bill of Lading, 4) Certificate of Origin from the Ministry of Energy and Mineral Development, 5) Authorized Independent Assaying Certificate.",
+      title: t('education.additional.sec2.title'),
+      content: t('education.additional.sec2.desc'),
       icon: FileText
     }
   ];
+
+  // Dynamic localization helpers for the Guides
+  const getGuideTitle = (guide: typeof EDUCATION_GUIDES[0]) => {
+    const key = `education.guide.${guide.id}.title`;
+    const val = t(key);
+    return val !== key ? val : guide.title;
+  };
+
+  const getGuideShortSummary = (guide: typeof EDUCATION_GUIDES[0]) => {
+    const key = `education.guide.${guide.id}.shortSummary`;
+    const val = t(key);
+    return val !== key ? val : guide.shortSummary;
+  };
+
+  const getSectionHeading = (guideId: string, sectIdx: number, defaultHeading: string) => {
+    const key = `education.guide.${guideId}.section.${sectIdx}.heading`;
+    const val = t(key);
+    return val !== key ? val : defaultHeading;
+  };
+
+  const getParagraph = (guideId: string, sectIdx: number, pIdx: number, defaultParagraph: string) => {
+    const key = `education.guide.${guideId}.section.${sectIdx}.p.${pIdx}`;
+    const val = t(key);
+    return val !== key ? val : defaultParagraph;
+  };
 
   return (
     <div className="w-full flex flex-col gap-8 relative" id="education-hub">
       {/* Editorial Title Banner */}
       <div className="luxury-glass border border-[#D4AF37]/18 p-8 rounded-3xl relative overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5)]">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/3 blur-[100px] pointer-events-none"></div>
-        <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block mb-2 font-bold">REGULATORY COMPLIANCE ACADEMY</span>
+        <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block mb-2 font-bold">{t('education.tag')}</span>
         <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-white leading-tight">
-          International Buyer <span className="gold-text-gradient">Education Center</span>
+          {t('education.title')}
         </h2>
         <div className="gold-accent-line my-4 max-w-xs" />
         <p className="text-xs md:text-sm text-white/70 mt-2 max-w-2xl leading-relaxed font-light">
-          Knowledge is the supreme defender of investor capital in African mineral trade. We publish definitive legal overviews, export templates, guidelines, and risk maps to shield global investors from compliance failures and fraudulent entities.
+          {t('education.desc')}
         </p>
       </div>
 
@@ -51,7 +77,7 @@ export default function EducationCenter() {
         <div className="lg:col-span-4 flex flex-col gap-6">
           <div className="flex flex-col gap-4">
             <h3 className="font-serif text-xs uppercase tracking-widest font-extrabold text-white/50 border-l-2 border-[#D4AF37] pl-2.5">
-              Select Legal Briefing
+              {t('education.select')}
             </h3>
             <div className="flex flex-col gap-2">
               {EDUCATION_GUIDES.map((guide) => {
@@ -68,8 +94,8 @@ export default function EducationCenter() {
                   >
                     <BookOpen className={`h-5 w-5 shrink-0 mt-0.5 ${isSelected ? 'text-[#D4AF37] gold-glow-icon' : 'text-white/35'}`} />
                     <div>
-                      <span className="block text-xs font-bold uppercase tracking-wider">{guide.title}</span>
-                      <span className="block text-[11px] text-white/45 mt-1 line-clamp-2 leading-relaxed font-light">{guide.shortSummary}</span>
+                      <span className="block text-xs font-bold uppercase tracking-wider">{getGuideTitle(guide)}</span>
+                      <span className="block text-[11px] text-white/45 mt-1 line-clamp-2 leading-relaxed font-light">{getGuideShortSummary(guide)}</span>
                     </div>
                   </button>
                 );
@@ -81,10 +107,10 @@ export default function EducationCenter() {
           <div className="bg-red-950/15 p-5 rounded-2xl border border-red-500/20 shadow-[0_0_15px_rgba(239,68,68,0.05)] backdrop-blur-md flex flex-col gap-3">
             <div className="flex items-center gap-2 text-red-400">
               <ShieldAlert className="h-5 w-5" />
-              <h4 className="font-serif text-xs uppercase tracking-widest font-bold">Scam Alert Notice</h4>
+              <h4 className="font-serif text-xs uppercase tracking-widest font-bold">{t('education.alert.title')}</h4>
             </div>
             <p className="text-[11px] text-white/60 leading-relaxed font-light">
-              If an unknown online supplier pitches you raw gold bullion with deep discounts exceeding 10% off the standard spot, demand physical on-ground verification. Mineral Dealers Africa provides prompt, independent audits.
+              {t('education.alert.desc')}
             </p>
           </div>
         </div>
@@ -102,7 +128,7 @@ export default function EducationCenter() {
             >
               <div className="flex items-center gap-2 mb-4 pb-4 border-b border-[#D4AF37]/15">
                 <BookOpen className="h-6 w-6 text-[#D4AF37] gold-glow-icon" />
-                <h3 className="font-serif text-xl font-bold text-white">{activeGuide.title}</h3>
+                <h3 className="font-serif text-xl font-bold text-white">{getGuideTitle(activeGuide)}</h3>
               </div>
 
               <div className="space-y-6">
@@ -110,13 +136,13 @@ export default function EducationCenter() {
                   <div key={idx} className="flex flex-col gap-2">
                     <h4 className="font-serif text-sm font-semibold text-[#D4AF37] flex items-center gap-2">
                       <ChevronRight className="h-4 w-4 text-[#D4AF37] shrink-0" />
-                      <span>{sect.heading}</span>
+                      <span>{getSectionHeading(activeGuide.id, idx, sect.heading)}</span>
                     </h4>
                     
                     <div className="space-y-3 pl-6">
                       {sect.paragraphs.map((p, pIdx) => (
                         <p key={pIdx} className="text-xs text-white/70 leading-relaxed font-light">
-                          {p}
+                          {getParagraph(activeGuide.id, idx, pIdx, p)}
                         </p>
                       ))}
                     </div>

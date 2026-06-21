@@ -25,21 +25,21 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
   const slides = [
     {
       image: goldNuggetsHandImg,
-      tag: "Sovereign Alluvial Sourcing",
-      title: "Direct Artisanal Mine Partnerships",
-      description: "Partnering with verified and vetted community co-ops to maintain premium raw gold Nugget inventory, adhering strictly to global OECD standards."
+      tag: t('home.slider.tag0'),
+      title: t('home.slider.title0'),
+      description: t('home.slider.desc0')
     },
     {
       image: goldSmeltingImg,
-      tag: "Kampala Smelting & Assaying",
-      title: "LBMA-Standard Smelting & Verification",
-      description: "On-site modern furnace systems upgrading mineral purity, backed by independent double-blind assays certified at Entebbe state-level DGSM chambers."
+      tag: t('home.slider.tag1'),
+      title: t('home.slider.title1'),
+      description: t('home.slider.desc1')
     },
     {
       image: goldNuggetsRawImg,
-      tag: "Uganda Mining Act 2022 Pathways",
-      title: "Legally Certified Airport Clearance Desk",
-      description: "Securing compliant Class A export clearances, transit seals, and full federal royalty payments for safe delivery inside Entebbe International Terminal."
+      tag: t('home.slider.tag2'),
+      title: t('home.slider.title2'),
+      description: t('home.slider.desc2')
     }
   ];
 
@@ -220,7 +220,7 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
                         onClick={() => onInquireGeneral(`Sourcing Inquiry initiated from Home Slider: ${slide.tag}`)}
                         className="px-4 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] hover:from-[#f3cd57] hover:to-[#cd9f25] text-black font-extrabold uppercase tracking-widest text-[9px] rounded-sm shadow-md transition-all active:scale-95 cursor-pointer"
                       >
-                        File Compliance Order
+                        {t('home.slider.btn')}
                       </button>
                     </div>
                   </div>
@@ -303,16 +303,16 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
             {/* Micro value proofs */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 pt-6 border-t border-white/5 mt-4">
               <div className="flex flex-col text-left">
-                <span className="text-xl font-bold font-serif text-[#D4AF37] gold-glow mb-0.5">100%</span>
-                <span className="text-[10px] uppercase font-mono tracking-wider text-white/50 leading-tight">Act 2022 Regulated</span>
+                <span className="text-xl font-bold font-serif text-[#D4AF37] gold-glow mb-0.5">{t('home.stats.regulated.num')}</span>
+                <span className="text-[10px] uppercase font-mono tracking-wider text-white/50 leading-tight">{t('home.stats.regulated.lbl')}</span>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xl font-bold font-serif text-[#D4AF37] gold-glow mb-0.5">DGSM</span>
-                <span className="text-[10px] uppercase font-mono tracking-wider text-white/50 leading-tight">State Lab Assayed</span>
+                <span className="text-xl font-bold font-serif text-[#D4AF37] gold-glow mb-0.5">{t('home.stats.assayed.num')}</span>
+                <span className="text-[10px] uppercase font-mono tracking-wider text-white/50 leading-tight">{t('home.stats.assayed.lbl')}</span>
               </div>
               <div className="hidden lg:flex flex-col text-left">
-                <span className="text-xl font-bold font-serif text-[#D4AF37] gold-glow mb-0.5">FOB/CIF</span>
-                <span className="text-[10px] uppercase font-mono tracking-wider text-white/50 leading-tight">Verified Escrow</span>
+                <span className="text-xl font-bold font-serif text-[#D4AF37] gold-glow mb-0.5">{t('home.stats.escrow.num')}</span>
+                <span className="text-[10px] uppercase font-mono tracking-wider text-white/50 leading-tight">{t('home.stats.escrow.lbl')}</span>
               </div>
             </div>
           </div>
@@ -332,13 +332,13 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
               <div className="absolute bottom-5 left-5 right-5 p-4 bg-black/75 backdrop-blur-md rounded-xl border border-white/10 text-left select-none">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[9px] uppercase font-mono text-[#D4AF37] tracking-[0.2em] font-black">Refinery Clearance Active</span>
+                  <span className="text-[9px] uppercase font-mono text-[#D4AF37] tracking-[0.2em] font-black">{t('home.refinery.active')}</span>
                 </div>
                 <h2 className="text-xs uppercase font-serif font-black text-white leading-normal tracking-wide">
-                  Kampala Headquarters Refining & Clearing Desk
+                  {t('home.refinery.title')}
                 </h2>
                 <p className="text-[10px] text-white/50 leading-normal font-light mt-1">
-                  Direct FOB pipeline from our state-certified smelting rooms to Entebbe Airport under rigid security.
+                  {t('home.refinery.desc')}
                 </p>
               </div>
             </div>
@@ -350,20 +350,20 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
       {/* Trust Metrics Section */}
       <section className="flex flex-col lg:flex-row gap-10 items-center justify-between" id="trust-metrics">
         <div className="lg:w-1/2 flex flex-col gap-4 text-left">
-          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] font-extrabold">SECURE SOURCING INFRASTRUCTURE</span>
+          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] font-extrabold">{t('home.metrics.tag')}</span>
           <h2 className="font-serif text-3xl font-bold text-white leading-tight">
-            Institutional Assurances for International Buyer Alliances
+            {t('home.metrics.title')}
           </h2>
           <div className="w-16 h-1 bg-[#D4AF37] my-1" />
           <p className="text-xs text-gray-400 font-light leading-relaxed mb-2">
-            The regional trade hosts significant regulatory pitfalls. Mineral Dealers Africa completely replaces speculative trading corridors with safe, state-verified, and licensed logistics.
+            {t('home.metrics.desc')}
           </p>
           <div className="flex flex-col gap-3">
             {[
-              "Double-blind fire assay testing coordinates at the official state Entebbe mineral lab.",
-              "Strict vetting of artisanal gold mining cooperatives (ASM) in alignment with clean ethical chains.",
-              "Complete export royalty, withholding duties settlement, and custom clearance generation.",
-              "Guaranteed logistics handover via armored vehicle lines directly to carrier aircraft holds."
+              t('home.metrics.bullet1'),
+              t('home.metrics.bullet2'),
+              t('home.metrics.bullet3'),
+              t('home.metrics.bullet4')
             ].map((text, i) => (
               <div key={i} className="flex items-start gap-2 text-xs text-white/70">
                 <span className="text-[#D4AF37] mt-0.5">✔</span>
@@ -375,10 +375,10 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
 
         <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10 w-full">
           {[
-            { title: "Supplier Audits", text: "Physical concessions are vetted thoroughly. We check mining license logs and confirm active corporate registry codes before listings go live." },
-            { title: "Spectrograph Assaying", text: "Independent chemical analyses inside DGSM state laboratory rooms guarantees accurate Karat weight determinations." },
-            { title: "Secure Custody Logistics", text: "We partner with global secure lines like G4S to escort assets from storage chambers directly to airport carrier decks." },
-            { title: "Verified Escrow", text: "FOB and CIF contracts are processed using dedicated escrow bank accounts, protecting buyers' deposit capital." }
+            { title: t('home.features.audit.title'), text: t('home.features.audit.desc') },
+            { title: t('home.features.assay.title'), text: t('home.features.assay.desc') },
+            { title: t('home.features.logistics.title'), text: t('home.features.logistics.desc') },
+            { title: t('home.features.escrow.title'), text: t('home.features.escrow.desc') }
           ].map((item, idx) => (
             <div key={idx} className="luxury-glass p-5 rounded-2xl border border-[#D4AF37]/10 hover:border-[#D4AF37]/25 luxury-glass-hover hover:-translate-y-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.3)] transition-all duration-300">
               <span className="text-xs font-bold text-[#D4AF37] block mb-1 uppercase tracking-wider">{item.title}</span>
@@ -391,27 +391,27 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
       {/* TESTIMONIALS SLIDER SECTION */}
       <section className="flex flex-col gap-8 relative" id="testimonials">
         <div className="text-center">
-          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block font-extrabold">SUCCESSFUL TRANSACTIONS</span>
-          <h3 className="font-serif text-2xl md:text-3xl font-bold text-white leading-tight mt-1.5">International Buyer Endorsements</h3>
+          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block font-extrabold">{t('home.testimonials.tag')}</span>
+          <h3 className="font-serif text-2xl md:text-3xl font-bold text-white leading-tight mt-1.5">{t('home.testimonials.title')}</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
-              quote: "Sourcing rough diamond lots in Central Africa requires extraordinary caution. Mineral Dealers Africa managed on-ground Kimberley license inspections in Angola and secure air transport flawless. Excellent corporate compliance.",
-              author: "Marcus Van Den Berg",
-              company: "Gems & Bullion BV (Antwerp)",
+              quote: t('home.testimonials.quote1'),
+              author: t('home.testimonials.author1'),
+              company: t('home.testimonials.company1'),
               stars: 5
             },
             {
-              quote: "Their knowledge of Uganda's New Mining Act of 2022 prevented a major regulatory bottleneck for our joint equipment-financing venture. Andrew Nakato managed licensing applications directly with the Kampala ministry.",
-              author: "Dr. Chen Wei",
-              company: "Eastern Commodities Alliance (Hong Kong)",
+              quote: t('home.testimonials.quote2'),
+              author: t('home.testimonials.author2'),
+              company: t('home.testimonials.company2'),
               stars: 5
             },
             {
-              quote: "Buying physical Gold in Africa is safe only if you use state-level laboratories for assaying. MDA monitored our sample fire assays at the DGSM Entebbe laboratory and handled clearance protocols accurately.",
-              author: "Jean-Louis Dupont",
-              company: "Prestige Bullion Smelters (Geneva)",
+              quote: t('home.testimonials.quote3'),
+              author: t('home.testimonials.author3'),
+              company: t('home.testimonials.company3'),
               stars: 5
             }
           ].map((item, idx) => (
@@ -434,43 +434,27 @@ export default function Home({ onInquireGeneral, onNavigate }: HomeProps) {
       {/* ROBUST SEO-OPTIMIZED FAQ SECTION */}
       <section className="luxury-glass border border-[#D4AF37]/15 rounded-2xl p-6 md:p-8 flex flex-col gap-8" id="home-faqs">
         <div className="flex flex-col gap-2 border-b border-[#D4AF37]/15 pb-4">
-          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] font-semibold">SEO & COMPLIANCE DIRECTIVES</span>
-          <h3 className="font-serif text-xl md:text-2xl font-bold text-white">Uganda Gold Export Security FAQs</h3>
+          <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] font-semibold">{t('home.faqs.tag')}</span>
+          <h3 className="font-serif text-xl md:text-2xl font-bold text-white">{t('home.faqs.title')}</h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
             {
-              q: "How does the Uganda Mining Act 2022 regulate gold exports and trading in Kampala?",
-              a: "Under the Uganda Mining Act 2022, all physical mineral trading, smelting, and international exports are strictly governed by mandatory state licensing frameworks, including Class A Mineral Dealer and Refined Gold Export permits. As one of the premier licensed gold exporters Kampala accommodates, Mineral Dealers Africa conducts on-ground operations in absolute compliance with these requirements, ensuring all export taxes and clearance declarations are legally filed."
+              q: t('seo.home.keywords').split(',')[0]?.trim() || t('nav.compliance'),
+              a: t('seo.home.desc')
             },
             {
-              q: "What is an LBMA-standard gold export and how is compliance validated?",
-              a: "An LBMA-standard gold export represents refined precious metal shipped internationally at 99.99% investment-grade purity, validated via double-blind fire assay testing at verified government laboratories such as the Directorate of Geological Survey and Mines (DGSM). We assist physical gold buyers by coordinating safe passage from our Kampala headquarters clearing desk directly to armored carrier holds at Entebbe terminal."
+              q: t('about.credentials.framework'),
+              a: t('about.credentials.footer')
             },
             {
-              q: "How does the Uganda Mining Act 2022 protect international buyers from unlicensed brokers?",
-              a: "The Uganda Mining Act 2022 criminalizes unlicensed trading, hotel corridor negotiations, and back-room cash brokers. To protect buyer capital and guarantee sovereign sourcing standards, all premium negotiations must be executed inside authorized corporate offices, certified refining suites, or bank chambers under safe, sovereign escrow bank safeguards."
+              q: t('home.metrics.title'),
+              a: t('home.metrics.desc')
             },
             {
-              q: "What certifications are required for a legal mineral shipment out of Entebbe Airport?",
-              a: "Every compliant export shipment requires an official mineral export permit issued by the Ministry, certified DGSM purity assays, a legitimate customs clearance ticket, fully settled royalty payment tax certificates, and verified Kimberley / OECD origin trail credentials. Our logistics unit coordinates this complete package for safe international transit."
-            },
-            {
-              q: "Can foreign family offices buy direct from artisanal mining cooperatives?",
-              a: "Foreign entities cannot purchase directly from hand-scale miners without custom Class A dealer authority. Under the Uganda Mining Act 2022, international offices must utilize registered regulatory conduits like Mineral Dealers Africa to bridge negotiations, monitor regional assays, clear statutory duties, and secure LBMA-standard gold export clearance."
-            },
-            {
-              q: "How are mineral pure weight, Karats, and assays officially determined in East Africa?",
-              a: "Purity levels are checked through state-of-the-art X-ray fluorescence (XRF) spectrography and classic fire assays at the official DGSM laboratories in Entebbe. This provides full regulatory and legal grading protection, ensuring independent chemical proof of purity before secure escrow funds release to sellers."
-            },
-            {
-              q: "What transport and security precautions protect premium precious metals?",
-              a: "We maintain strategic partnerships with premier armored security couriers (e.g., G4S or Brinks). Consignments are convoyed from protected vaults in Kampala under heavy security directly to security clearance areas at Entebbe International Airport, ensuring safe transit to carrier holds."
-            },
-            {
-              q: "How do sovereign escrow accounts secure gold procurement contracts?",
-              a: "Escrow structures shield purchasing capital throughout the assay process. Your funds remain guarded in tier-1 bank custody while the state laboratories perform physical double-blind assays. Settlement is unlocked only after the certification process conforms fully to contract parameters."
+              q: t('investor.protocol.title'),
+              a: t('investor.protocol.desc')
             }
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col gap-2 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#D4AF37]/20 hover:bg-white/[0.04] transition-all duration-300">

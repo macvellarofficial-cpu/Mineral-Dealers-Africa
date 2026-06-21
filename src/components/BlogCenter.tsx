@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { BookOpen, User, Calendar, Clock, ArrowLeft, Search, Tag, Eye } from 'lucide-react';
 import { BlogArticle } from '../types';
 import { BLOG_POSTS } from '../data/mineralData';
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function BlogCenter() {
+  const { t } = useLanguage();
   const [selectedPost, setSelectedPost] = useState<BlogArticle | null>(null);
   const [activeTagFilter, setActiveTagFilter] = useState<string | null>(null);
   const [blogSearch, setBlogSearch] = useState('');
@@ -40,15 +42,15 @@ export default function BlogCenter() {
             className="flex flex-col gap-8"
           >
             {/* Title Block */}
-            <div className="luxury-glass border border-[#D4AF37]/18 p-8 rounded-3xl relative overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5),0_0_20px_rgba(212,175,55,0.03)]">
+            <div className="luxury-glass border border-[#D4AF37]/18 p-8 rounded-3xl relative overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5),0_0_20px_rgba(212,175,55,0.03)] font-sans">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/3 blur-[100px] pointer-events-none"></div>
-              <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block mb-2 font-bold">PUBLISHED INTELLIGENCE</span>
+              <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#D4AF37] block mb-2 font-bold">{t('blog.tag')}</span>
               <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-white leading-tight">
-                African Mineral Trade <span className="gold-text-gradient">Journal & News</span>
+                {t('blog.title')}
               </h2>
               <div className="gold-accent-line my-4 max-w-xs" />
               <p className="text-xs md:text-sm text-white/70 mt-2 max-w-2xl leading-relaxed font-light">
-                Expert insights and industry publications targeting African precious metals and gemstone sourcing. We cover compliance benchmarks, mineral verification services, mining laws, and local procurement frameworks.
+                {t('blog.desc')}
               </p>
             </div>
 
@@ -65,7 +67,7 @@ export default function BlogCenter() {
                       : 'bg-black/40 text-white/50 border border-white/10 hover:text-[#D4AF37] hover:border-[#D4AF37]/35'
                   }`}
                 >
-                  All Articles
+                  {t('blog.tab.all') !== 'blog.tab.all' ? t('blog.tab.all') : 'All Articles'}
                 </button>
                 {allTags.map((tag) => (
                   <button
@@ -89,7 +91,7 @@ export default function BlogCenter() {
                   type="text"
                   value={blogSearch}
                   onChange={(e) => setBlogSearch(e.target.value)}
-                  placeholder="Query publications..."
+                  placeholder={t('blog.search')}
                   className="w-full bg-black/40 border border-[#D4AF37]/15 focus:border-[#D4AF37] text-white rounded-lg p-2.5 pl-9 text-xs outline-none"
                 />
               </div>
@@ -177,7 +179,7 @@ export default function BlogCenter() {
               id="back-to-journal-btn"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>Back to Journal</span>
+              <span>{t('blog.back')}</span>
             </button>
 
             {/* Header Credentials */}
@@ -257,7 +259,7 @@ export default function BlogCenter() {
             {/* Disclaimer block */}
             <div className="bg-black/50 p-4 border border-[#D4AF37]/15 rounded-xl text-[11px] text-white/50 mt-2 leading-relaxed font-light">
               <span className="font-bold text-[#D4AF37] block mb-1">JOURNAL DISPATCH:</span>
-              <p>Articles published in Mineral Dealers Africa are based on authorized geological directives, parliamentary acts in Entebbe (Uganda), and physical on-ground trade auditing. No individual segment represents a securities trading proposal without appropriate municipal assent.</p>
+              <p>{t('blog.disclaimer')}</p>
             </div>
 
           </motion.div>
